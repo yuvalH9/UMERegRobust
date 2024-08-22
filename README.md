@@ -186,6 +186,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)  |                _78.5_                |               _50.1_               |
 | [GCL](https://github.com/liuQuan98/GCL)       |                 40.1                 |                28.8                |
 | UMERegRobust            |               **81.1**               |              **73.3**              |
+
 **Table2:** RotKITTI Benchmark - Registration Recall [%]
 
 ### LoKITTI
@@ -197,6 +198,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)  |                 37.8                 |                7.2                 |
 | [GCL](https://github.com/liuQuan98/GCL)       |               **72.3**               |                26.9                |
 | UMERegRobust            |                _59.3_                |              **30.2**              |
+
 **Table3:** LoKITTI Benchmark - Registration Recall [%]
 <hr>
 
@@ -210,6 +212,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)   |                 70.7                 |                37.9                |
 | [GCL](https://github.com/liuQuan98/GCL)         |                _82.0_                |               _67.5_               |
 | UMERegRobust            |               **85.5**               |              **76.0**              |
+
 **Table4:** nuScenes Benchmark - Registration Recall [%]
 
 ### RotNuscenes
@@ -221,6 +224,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)   |                _34.3_                |                13.1                |
 | [GCL](https://github.com/liuQuan98/GCL)      |                 21.0                 |                19.6                |
 | UMERegRobust            |               **51.9**               |              **39.7**              |
+
 **Table5:** RotNuScenes Benchmark - Registration Recall [%]
 
 ### LoNuscenes
@@ -232,6 +236,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)    |                 48.1                 |                17.3                |
 | [GCL](https://github.com/liuQuan98/GCL)         |                _62.3_                |                5.6                 |
 | UMERegRobust            |               **70.8**               |              **56.3**              |
+
 **Table6:** LoNuScenes Benchmark - Registration Recall [%]
 
 <hr>
