@@ -174,6 +174,7 @@ respectively.
 | [GeoTrans](https://github.com/qinzheng93/GeoTransformer)             |                 66.3                 |                  62.6                   |
 | [GCL](https://github.com/liuQuan98/GCL)                              |                _93.9_                |                 _78.6_                  |
 | UMERegRobust                                                         |               **94.3**               |                **87.8**                 |
+
 **Table1:** KITTI Benchmark - Registration Recall [%]
 
 ### RotKITTI
