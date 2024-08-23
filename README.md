@@ -4,13 +4,10 @@
 
 
 ![ECCV 2024](https://img.shields.io/badge/ECCV-2024-blue.svg)
-
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/umeregrobust-universal-manifold-embedding/point-cloud-registration-on-rotkitti)](https://paperswithcode.com/sota/point-cloud-registration-on-rotkitti?p=umeregrobust-universal-manifold-embedding)
 </div>
 
 
-[//]: # ([![PWC]&#40;https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/density-invariant-features-for-distant-point/point-cloud-registration-on-kitti-distant-pcr&#41;]&#40;https://paperswithcode.com/sota/point-cloud-registration-on-kitti-distant-pcr?p=density-invariant-features-for-distant-point&#41;)
-
-[//]: # ([![PWC]&#40;https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/density-invariant-features-for-distant-point/point-cloud-registration-on-nuscenes-distant&#41;]&#40;https://paperswithcode.com/sota/point-cloud-registration-on-nuscenes-distant?p=density-invariant-features-for-distant-point&#41;)
 
 <hr>
 
@@ -37,7 +34,7 @@ especially when strict precision  of $(1^\circ, 10cm)$ is considered (with an av
 and notably outperform SOTA methods on the RotKITTI benchmark
 (with +45% gain compared the most recent SOTA method).
 
-[//]: # (**Paper Links:** TODO)
+**Paper Link:** [https://www.arxiv.org/abs/2408.12380](https://www.arxiv.org/abs/2408.12380) <br>
 
 <hr>
 
