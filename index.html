@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <!--    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FP5R7YX8ED"></script>-->
+    <!--    <script>-->
+    <!--        window.dataLayer = window.dataLayer || [];-->
+    <!--        function gtag(){dataLayer.push(arguments);}-->
+    <!--        gtag('js', new Date());-->
+
+    <!--        gtag('config', 'G-FP5R7YX8ED');-->
+    <!--    </script>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UMERegRobust - Universal Manifold Embedding Compatible Features for Robust Point Cloud Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <style>
+        .item-row {
+            border-bottom: 1px solid #d6d6d6;
+        }
+        .novel-depth-imgs {
+            margin-top:10px
+        }
+        .novel-depth-input-img {
+            margin-top:0px
+        }
+        .arrow {
+            right: -8px!important
+        }
+        .arrow-3d {
+            right: -8px!important
+        }
+        .rgbs {
+            width: 38%;
+            padding:1px;
+            background-color: rgb(168 0 219);
+            /* border-color: rgb(168 0 219); */
+            border: none;
+        }
+        .novel-depth-item {
+            margin-bottom: 1rem;
+        }
+        .input-td {
+            padding-bottom: 12px;
+        }
+        .traj-vid {
+            width: 80%;
+        }
+        .novel-depth-input-img {
+            background-color: rgb(1 126 0);
+            border: none;
+            /* border-color: rgb(1 126 0); */
+        }
+        .novel-depth-imgs {
+            background-color: rgb(168 0 219);
+            border: none;
+            /* border-color: rgb(168 0 219); */
+        }
+        .carousel-item{
+            height: 500px;
+            /* border: 1px solid #d6d6d6; */
+            border-radius: 5px;
+        }
+        .nav-link:hover {
+            cursor: pointer;
+        }
+        #progressBarContainer {
+            /* width: 100%; */
+            /* background-color: #ddd; */
+            position: absolute;
+            top:3px;
+            left: 3px;
+        }
+        a {
+            text-decoration: none;
+        }
+        #carouselExampleIndicators .carousel-item {
+            transition: none !important;
+        }
+
+        .indicator-button {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Black background for arrows */
+            border-radius: 50%; /* Rounded shape for arrows */
+            width: 40px; /* Adjust size as needed */
+            height: 40px;
+        }
+
+        /* Optional: Change the color of the icon itself */
+        .carousel-control-prev-icon::before,
+        .carousel-control-next-icon::before {
+            color: white; /* Change the color of the arrow */
+            font-size: 20px; /* Adjust icon size as needed */
+        }
+        /* Centering the text below each image */
+        .carousel-caption-container {
+            text-align: center; /* Center the text */
+            padding-top: 10px; /* Space above the caption text */
+            background-color: #f8f9fa;
+            color: black; /* Text color */
+            padding: 10px;
+        }
+         /* Centering the text below the carousel */
+        .static-text-container {
+            text-align: center; /* Center the text */
+            font-size: 18px; /* Adjust text size */
+            color: black; /* Text color */
+            background-color: #f8f9fa; /* Light background for contrast */
+            padding: 10px; /* Padding around the text */
+        }
+        .custom-list {
+             counter-reset: list-counter;
+             list-style: none;
+         }
+        .custom-list li::before {
+             counter-increment: list-counter;
+             content: "[" counter(list-counter) "]";
+             margin-right: 0.5em; /* Adjust as needed */
+         }
+
+
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+</head>
+<body>
+<div class="container">
+    <h3 class="text-center display-5"><b>UMERegRobust</b></h3>
+    <h3 class="text-center display-5">Universal Manifold Embedding Compatible Features for Robust Point Cloud
+        Registration</h3>
+    <h4 class="text-center">
+        ECCV 2024
+    </h4>
+    <div class="row mt-3">
+        <ul class="list-inline text-center">
+            <li class="list-inline-item" style="padding-right: 20px;"><h4><a
+                    href="https://scholar.google.co.il/citations?user=Gsa-kwkAAAAJ&hl=en">Yuval Haitman</a></h4></li>
+            <li class="list-inline-item" style="padding-right: 20px;"><h4>Amit Efraim</h4></li>
+            <li class="list-inline-item"><h4><a
+                    href="https://scholar.google.co.il/citations?user=vqojgYAAAAAJ&hl=en">Joseph M. Francos</a></h4>
+            </li>
+        </ul>
+        <div class="text-center">
+            <h4 class="text-center">
+                Ben-Gurion University
+            </h4>
+
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class=" mx-auto">
+            <div style="text-align: center;">
+                <a class="btn btn-dark" href="https://arxiv.org/pdf/2408.12380.pdf" target="_blank">
+                    <span class="icon">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </span>
+                    <span>Paper</span>
+                </a>
+
+                <a class="btn btn-dark" href="https://arxiv.org/abs/2408.12380" target="_blank">
+                    <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                        </span>
+                    <span>arXiv</span>
+                </a>
+
+                <!--                    <a class="btn btn-dark" href="https://youtu.be/" target="_blank">-->
+                <!--                        <span class="icon">-->
+                <!--                            <i class="fab fa-youtube"></i>-->
+                <!--                        </span>-->
+                <!--                        <span>Video</span>-->
+                <!--                    </a>-->
+
+
+                <a class="btn btn-dark" href="https://github.com/yuvalH9/UMERegRobust" target="_blank">
+                        <span class="icon">
+                            <i class="fab fa-github"></i>
+                        </span>
+                    <span>Code</span>
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+        <!-- <h3 class="text-center">Teaser</h3> -->
+        <div class="mb-4 col-md-10 mx-auto text-center">
+            <!-- <h6 class="text-center">Panoptic Scene Completion with Uncertainty Awareness</h6> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="my_imgs/pc_example.png" alt="Image 1" style="width: 100%;" class="rounded img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <img src="my_imgs/teaser.png" alt="Image 2" style="width: 100%;" class="rounded img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-10 mx-auto mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-pills nav-3d justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active">GT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">UMERegRobust</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">GCL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">GeoTransformer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">FCGF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Predator</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="card-body">
+
+                    <div id="carouselExampleIndicators" class="carousel carousel-dark" data-bs-ride="false">
+                        <!-- <div class="carousel-indicators" id="carouselIndicators"></div> -->
+
+                        <div class="carousel-inner" id="carouselInner">
+                            <div class="alert alert-light position-absolute top-1 start-50 translate-middle"
+                                 style="top: 15px;" role="alert">
+                                <h6>Click and drag to interact</h6>
+                            </div>
+                            <div class="alert alert-light position-absolute top-1 start-50 translate-middle"
+                                 style="top: 50px;" role="alert">
+                                <h6 id="MethodErrPlaceHolder">Loading...</h6>
+                            </div>
+                            <div id="progressBarContainer" class="spinner-border text-primary" role="status"
+                                 style="display: none;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <div class="custom-indicators" id="carouselIndicators">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0">Scene 1</button> -->
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">Scene 2</button> -->
+                        <!-- Add more buttons as needed -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col-md-6 text-center mx-auto">
+            <h3 class="text-center"><i class="fa-solid fa-file"></i> Abstract</h3>
+            <p style="text-align: justify;">
+                We adopt the Universal Manifold Embedding (UME) framework for the estimation of rigid
+                transformations and extend it, so that it can accommodate scenarios involving partial overlap and
+                differently sampled point clouds. UME is a methodology designed for mapping observations of the same
+                object, related by rigid transformations, into a single low-dimensional linear subspace. This process
+                yields a transformation-invariant representation of the observations, with its matrix form
+                representation being covariant (i.e. equivariant) with the transformation.
+                We extend the UME framework by introducing a
+                UME-compatible feature extraction method augmented with a unique UME contrastive loss and a sampling
+                equalizer. These components are integrated into a comprehensive and robust registration pipeline, named
+                ${\it UMERegRobust}$. We propose the RotKITTI registration benchmark, specifically tailored to evaluate
+                registration methods for scenarios involving large rotations. UMERegRobust achieves better than
+                state-of-the-art performance on the KITTI benchmark, especially when strict precision of $(1^\circ,
+                10cm)$ is considered (with an average gain of $+9\%$), and notably outperform SOTA methods on the
+                RotKITTI benchmark (with $+45\%$ gain compared the most recent SOTA method).
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row col-md-10 mx-auto mb-5">
+        <h3 class="text-center"><i class="fa-solid fa-flask"></i> Method Overview</h3>
+        <div>
+            <img src="my_imgs/method.png" style="width: 100%;" class="rounded img-fluid" alt="Overview of our method">
+        </div>
+        <div style="text-align: justify;">
+            <br>
+            $\textbf{UMERegRobust Overview.}$ $\mathcal{P}$ and $\mathcal{Q}$ are the input point clouds;
+            (1) The UME Compatible Coloring Module resamples the point clouds into a uniform grid generating
+            $\widetilde{\mathcal{P}}$ and $\widetilde{\mathcal{Q}}$,
+            then assigns for each point a transformation invariant feature vector creating the colored point clouds
+            $\mathcal{F}_{\widetilde{\mathcal{P}}},
+            \mathcal{F}_{\widetilde{\mathcal{Q}}}$.
+            (2) Local UME descriptors, generated on a down-sampled versions of the point clouds $\widehat{\mathcal{P}},
+            \widehat{\mathcal{Q}}$,
+            are denoted by $\{\mathbf{H}_{\boldsymbol{p}}\}_{k=1}^K,\{\mathbf{H}_{\boldsymbol{q}}\}_{k=1}^K$,
+            respectively.
+            A Matched Manifold Detector identifies corresponding local UME descriptors,
+            forming a set of $K$ putative matched pairs $\mathcal{C}$.
+            For each matched pair, an estimated transformation is obtained using the RTUME estimator.
+            (3) Feature correlation is used to select the hypnosis that maximize the feature correlation between the
+            point clouds.
+        </div>
+    </div>
+
+    <div class="col-md-10 mx-auto mx-auto">
+        <h3 class="text-center"><i class="fa-solid fa-square-poll-vertical"></i> Results
+        </h3>
+       <div class="container mt-1">
+    <div id="results-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="carousel-item active">
+                <img src="my_imgs/table1.png" class="d-block w-100"  alt="Image 1">
+            </div>
+            <!-- Second Slide -->
+            <div class="carousel-item">
+                <img src="my_imgs/table2.png" class="d-block w-100" alt="Image 2">
+            </div>
+            <!-- Third Slide -->
+            <div class="carousel-item" >
+                <img src="my_imgs/table3.png" class="d-block w-100"  alt="Image 3">
+            </div>
+        </div>
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#results-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#results-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (Optional for dynamic effects) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+
+
+        <div class="row col-md-10 mx-auto mb-5">
+            <h3 class="text-center"><i class="fa-solid fa-quote-left"></i> Citation</h3>
+            <div>
+                If you find this project useful for your research, please cite
+                <div class="card-block" style="background-color: #f5f5f5; padding:8px;">
+                    <!-- <div class="card-text" style="text-align: left;background-color: #f5f5f5;">                                                 -->
+                    <pre class="card-text" style="text-align: left;">
+    @InProceedings{haitman2024umeregrobust,
+        title={UMERegRobust - Universal Manifold Embedding Compatible Features for Robust Point Cloud Registration},
+        author={Yuval Haitman and Amit Efraim and Joseph M. Francos},
+        year={2024},
+        booktitle = {ECCV}
+    }
+                    </pre>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-10 mx-auto">
+                <h3 class="text-center"><i class="fa-solid fa-reply"></i> References</h3>
+                <ul class="custom-list">
+                    <li>Christopher and Jaesik Park and Vladlen Koltun: <em>Fully Convolutional Geometric Features</em>.
+                        In ICCV(2019). <a href="https://github.com/chrischoy/FCGF">GitHub</a>.
+                    </li>
+                    <li>Huang, Shengyu and Gojcic, Zan and Usvyatsov, Mikhail and Wieser, Andreas and Schindler, Konrad:
+                        <em>Predator: Registration of 3D Point Clouds With Low Overlap</em>. In CVPR(2021). <a
+                                href="https://github.com/prs-eth/OverlapPredator">GitHub</a>.
+                    </li>
+                    <li>Yu, Hao and Li, Fu and Saleh, Mahdi and Busam, Benjamin and Ilic, Slobodan: <em>CoFiNet:
+                        Reliable Coarse-to-fine Correspondences for Robust PointCloud Registration</em>. In
+                        NeurIPS(2021). <a href="https://github.com/haoyu94/Coarse-to-fine-correspondences">GitHub</a>.
+                    </li>
+                    <li>Zheng Qin and Hao Yu and Changjian Wang and Yulan Guo and Yuxing Peng and Kai Xu: <em>Geometric
+                        Transformer for Fast and Robust Point Cloud Registration</em>. In CVPR(2022). <a
+                            href="https://github.com/qinzheng93/GeoTransformer">GitHub</a>.
+                    </li>
+                    <li>Q. Liu and H. Zhu and Y. Zhou and H. Li and S. Chang and M. Guo: <em>Density-invariant Features
+                        for Distant Point Cloud Registration</em>. In ICCV(2023). <a
+                            href="https://github.com/liuQuan98/GCL">GitHub</a>.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-10 mx-auto">
+            <h3 class="text-center"><i class="fa-sharp fa-solid fa-building-columns"></i> Acknowledgements</h3>
+            <div>This work was supported by Israel Innovation Authority under Grant 77887. <br>
+                We thank
+                <a href="https://github.com/astra-vision/PaSCo">PaSCo</a> contributors for the web-page template.
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+        integrity="sha512-J9QfbPuFlqGD2CYVCa6zn8/7PEgZnGpM5qtFOBZgwujjDnG5w5Fjx46YzqvIh/ORstcj7luStvvIHkisQi5SKw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f790f706b7.js" crossorigin="anonymous"></script>
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "./js/three.module.js"
+        }
+    }
+</script>
+<script type="module">
+    import * as THREE from 'three';
+    import { PCDLoader } from './js/PCDLoader.js';
+    import { OrbitControls } from './js/OrbitControls.js';
+
+    const rre_dict = {'s1':{'GT': 54.2, 'our': 0.4, 'GCL': 1.4, 'FCGF': 54, 'predetor': 54, 'geoTrans': 94},
+    's2': {'GT': 52.3,'our': 0.2, 'GCL': 61, 'FCGF': 52, 'predetor': 52, 'geoTrans': 0.3},
+    's3': {'GT': 102.8,'our': 0.4, 'GCL': 102, 'FCGF': 102, 'predetor': 102, 'geoTrans': 114},
+    's4': {'GT': 97.2,'our': 1.9, 'GCL': 97, 'FCGF': 99, 'predetor': 97, 'geoTrans': 40}
+}
+const rte_dict = {'s1':{'GT': 38.2, 'our': 0.48, 'GCL': 1.5, 'FCGF': 38, 'predetor': 38, 'geoTrans': 48},
+    's2': {'GT':40.5,'our': 0.01, 'GCL': 34, 'FCGF': 50, 'predetor': 40, 'geoTrans': 0.1},
+    's3': {'GT': 31,'our': 0.03, 'GCL': 31, 'FCGF': 31, 'predetor': 31, 'geoTrans': 53},
+    's4': {'GT': 32.8,'our': 0.6, 'GCL': 32, 'FCGF': 37, 'predetor': 32, 'geoTrans': 48}
+}
+    let renderer;
+    let currentCamera, currentControls; // Keep track of the current camera and controls
+    let savedCameraPosition, savedCameraRotation, savedControlsTarget;
+    //savedCameraPosition = new THREE.Vector3(0, 20, -14);  // Initial camera position
+    savedCameraPosition = new THREE.Vector3(0, 0, 100);  // Initial camera position
+    savedCameraRotation = new THREE.Euler();             // Initial camera rotation
+    savedControlsTarget = new THREE.Vector3(0, 10, 0);    // Initial controls target
+
+
+    function initScene(containerId, modelPath) {
+        const container = document.getElementById(containerId);
+        let width = container.parentElement.clientWidth;
+        let height = container.parentElement.clientHeight;
+
+        // Clear existing content in the container
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+        // Scene
+        const scene = new THREE.Scene();
+
+         // Camera
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.set(0, 10, -12);
+        currentCamera = camera; // Update current camera
+
+
+
+         // Renderer (reuse if already created)
+        if (!renderer) {
+            renderer = new THREE.WebGLRenderer();
+        } else {
+            // Renderer
+            const renderer = new THREE.WebGLRenderer();
+        }
+        renderer.setSize(width, height);
+        renderer.setClearColor( 0xffffff, 0);
+
+        // Append renderer to the container
+        container.appendChild(renderer.domElement);
+
+        // Orbit Controls
+        const controls = new OrbitControls(camera, renderer.domElement);
+        currentControls = controls;
+        controls.enableDamping = true; // Enable damping
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 1;
+        controls.maxDistance = 500;
+        controls.panSpeed = 2;
+        controls.zoomSpeed = 1.2;
+        controls.rotateSpeed = 0.7;
+        controls.target.set(0, 8, 0);
+
+        if (savedCameraPosition && savedCameraRotation && savedControlsTarget) {
+            camera.position.copy(savedCameraPosition);
+            camera.rotation.copy(savedCameraRotation);
+            controls.target.copy(savedControlsTarget);
+        }
+
+        // PCD Loader
+        const loader1 = new PCDLoader();
+        const loader2 = new PCDLoader();
+        const modelPath1 = modelPath + "src_tform.pcd"
+        console.log(modelPath1);
+        loader1.load(
+            modelPath1,
+            function (points) {
+                const  material = new THREE.PointsMaterial({ color: 0x6699FF , size: 0.3});
+                points.material = material;
+                scene.add(points);
+                animate();
+                hideProgressBar(); // Hide the progress bar on success
+            },
+            function (xhr) {
+                // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                const percentComplete = xhr.loaded / xhr.total * 100;
+                // updateProgressBar(percentComplete);
+            },
+            function (error) {
+                console.log('An error happened', error);
+                hideProgressBar(); // Hide the progress bar on error
+            }
+        );
+        const modelPath2 = modelPath + "tgt.pcd"
+        console.log(modelPath2);
+        loader2.load(
+            modelPath2,
+            function (points) {
+                const  material = new THREE.PointsMaterial({ color: 0xFF7C80 , size: 0.3});
+                points.material = material;
+                scene.add(points);
+                animate();
+                hideProgressBar(); // Hide the progress bar on success
+            },
+            function (xhr) {
+                // console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                const percentComplete = xhr.loaded / xhr.total * 100;
+                // updateProgressBar(percentComplete);
+            },
+            function (error) {
+                console.log('An error happened', error);
+                hideProgressBar(); // Hide the progress bar on error
+            }
+        );
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update(); // Required for damping
+
+
+
+            renderer.render(scene, camera);
+
+        }
+
+        // Add this function inside your initScene function
+        function onWindowResize() {
+            // Update camera aspect ratio and renderer size
+            // camera.aspect = window.innerWidth / window.innerHeight;
+            // const container = document.getElementById(containerId);
+            const container = document.getElementById(containerId);
+            let width = container.parentElement.clientWidth;
+            let height = container.parentElement.clientHeight;
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+
+        // Add RTE and RRE
+        const name_parts = modelPath1.split('/');
+        const sceneId = name_parts[1];
+        const currentMethod = name_parts[2];
+
+        if (currentMethod == 'GT'){
+        MethodErrPlaceHolder.innerHTML  = "$\\theta_{GT}$: $"+rre_dict[sceneId][currentMethod]+"^\\circ$  $t_{GT}$: $"+rte_dict[sceneId][currentMethod]+"m$";
+        }
+        else
+        {
+        MethodErrPlaceHolder.innerHTML  = "RRE: $"+rre_dict[sceneId][currentMethod]+"^\\circ$  RTE: $"+rte_dict[sceneId][currentMethod]+"m$";
+        }
+
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub, 'MethodErrPlaceHolder_'+sceneId]);
+        // Add event listener for window resize
+        window.addEventListener('resize', onWindowResize, false);
+    }
+
+// Call this function to switch to a different scene
+function switchScene(containerId, modelPath) {
+
+    showProgressBar(); // Show the progress bar
+
+
+
+
+    // if (currentControls) {
+    //     currentControls.dispose(); // Dispose current controls if exist
+    // }
+    if (currentCamera && currentControls) {
+        savedCameraPosition = currentCamera.position.clone();
+        savedCameraRotation = currentCamera.rotation.clone();
+        savedControlsTarget = currentControls.target.clone();
+    }
+    initScene(containerId, modelPath); // Initialize new scene
+}
+function showProgressBar() {
+    document.getElementById('progressBarContainer').style.display = 'block';
+    // updateProgressBar(0);
+}
+
+function hideProgressBar() {
+    document.getElementById('progressBarContainer').style.display = 'none';
+}
+
+function updateProgressBar(percent) {
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.width = percent + '%';
+}
+
+
+
+
+const frame_ids = [1, 2, 3, 4];
+const gt_paths = frame_ids.map(id => `pointClouds/s${id}/GT/`);
+const our_paths = frame_ids.map(id => `pointClouds/s${id}/our/`);
+const gcl_paths = frame_ids.map(id => `pointClouds/s${id}/GCL/`);
+const geotrans_paths = frame_ids.map(id => `pointClouds/s${id}/geoTrans/`);
+const fcgf_paths = frame_ids.map(id => `pointClouds/s${id}/FCGF/`);
+const predetor_paths = frame_ids.map(id => `pointClouds/s${id}/predetor/`);
+
+const indicators = document.getElementById('carouselIndicators');
+const carouselInner = document.getElementById('carouselInner');
+
+// Remove existing indicators
+while (carouselIndicators.firstChild) {
+    indicators.removeChild(carouselIndicators.firstChild);
+}
+
+// frame_ids.forEach((id, index) => {
+//     const button = document.createElement('button');
+//     button.type = 'button';
+//     button.className = 'btn btn-secondary';
+//     button.setAttribute('data-bs-target', '#carouselExampleIndicators');
+//     button.setAttribute('data-bs-slide-to', index.toString());
+//     button.textContent = 'Scene ' + (index + 1);
+
+//     indicators.appendChild(button);
+// });
+
+frame_ids.forEach((id, index) => {
+    // Create carousel indicator
+    const indicator = document.createElement('button');
+    indicator.type = 'button';
+    indicator.textContent = 'Scene ' + (index + 1);
+    indicator.className = 'btn btn-secondary btn-sm indicator-button';
+    indicator.dataset.bsTarget = '#carouselExampleIndicators';
+    indicator.dataset.bsSlideTo = index;
+    indicator.setAttribute('aria-label', `Slide ${index + 1}`);
+
+    if (index === 0) indicator.classList.add('active');
+    indicators.appendChild(indicator);
+
+    // Create carousel item
+    const item = document.createElement('div');
+    item.classList.add('carousel-item');
+    if (index === 0) item.classList.add('active');
+    item.id = `carouselItem${index + 1}`;
+
+    const sceneContainer = document.createElement('div');
+    sceneContainer.id = `sceneContainer${index + 1}`;
+    item.appendChild(sceneContainer);
+
+    carouselInner.appendChild(item);
+});
+
+
+    // Initialize the first scene
+switchScene('sceneContainer1', gt_paths[0]);
+
+var currentTab = "GT"; // Variable to hold the value of the current tab
+var model_paths = [];
+// Event listener for carousel slide
+$('#carouselExampleIndicators').on('slid.bs.carousel', function (e) {
+    const nextSlideId = e.relatedTarget.id;
+    const nextContainerId = 'sceneContainer' + nextSlideId.charAt(nextSlideId.length - 1);
+    model_paths = updateModelPaths(); // Update model paths based on current tab
+
+    let model_path = model_paths[parseInt(nextSlideId.charAt(nextSlideId.length - 1)) - 1];
+    if (!document.getElementById(nextContainerId).hasChildNodes()) {
+        switchScene(nextContainerId, model_path);
+    }
+
+    const indicators = document.querySelectorAll('#carouselIndicators button');
+    indicators.forEach((indicator, index) => {
+        let item_id = parseInt(nextSlideId.charAt(nextSlideId.length - 1)-1)
+        if (index === item_id) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $(".nav-3d .nav-item .nav-link").click(function() {
+        $(".nav-3d .nav-item .nav-link").removeClass("active");
+        $(this).addClass("active");
+        currentTab = $(this).text().trim();
+        model_paths = updateModelPaths(); // Update model paths based on clicked tab
+        // Find the active carousel item and get its ID
+        var activeCarouselItemId = $('#carouselExampleIndicators .carousel-item.active').attr('id');
+        var activeCarouselIndex = activeCarouselItemId ? activeCarouselItemId.charAt(activeCarouselItemId.length - 1) : '1';
+        var nextContainerId = 'sceneContainer' + activeCarouselIndex;
+
+        // Initialize the scene for the active carousel item
+        switchScene(nextContainerId, model_paths[parseInt(activeCarouselIndex) - 1]);
+    });
+});
+
+function updateModelPaths() {
+
+    switch (currentTab) {
+        case "GT":
+            model_paths = gt_paths;
+            break;
+        case "UMERegRobust":
+            model_paths = our_paths;
+            break;
+        case "GCL":
+            model_paths = gcl_paths;
+            break;
+        case "GeoTransformer":
+            model_paths = geotrans_paths;
+            break;
+        case 'FCGF':
+            model_paths = fcgf_paths;
+            break;
+        case 'Predator':
+            model_paths = predetor_paths;
+            break;
+    }
+    return model_paths
+}
+</script>
+</body>
+</html>
