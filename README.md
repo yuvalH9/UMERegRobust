@@ -239,7 +239,18 @@ respectively.
 <hr>
 
 ## Citation
-
+If you find this work useful, please cite:
+```bibtex
+@misc{haitman2024umeregrobust,
+      title={UMERegRobust - Universal Manifold Embedding Compatible Features for Robust Point Cloud Registration}, 
+      author={Yuval Haitman and Amit Efraim and Joseph M. Francos},
+      year={2024},
+      eprint={2408.12380},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2408.12380}, 
+}
+```
 <hr>
 
 [//]: # ()
