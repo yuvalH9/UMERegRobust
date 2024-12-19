@@ -34,7 +34,8 @@ especially when strict precision  of $(1^\circ, 10cm)$ is considered (with an av
 and notably outperform SOTA methods on the RotKITTI benchmark
 (with +45% gain compared the most recent SOTA method).
 
-**Paper Link:** [https://www.arxiv.org/abs/2408.12380](https://www.arxiv.org/abs/2408.12380) <br>
+**Arxiv Link:** [https://www.arxiv.org/abs/2408.12380](https://www.arxiv.org/abs/2408.12380) <br>
+**Paper Link:** [ECCV2024 Springer Version](https://rdcu.be/d4bZO) <br>
 
 <hr>
 
